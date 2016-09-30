@@ -26,7 +26,7 @@ var example1 = new Vue({
       { user: "James",text: 'Bar' }
     ]
   },
-  methods: 
+  methods: []
 });
 
 socket.on('chat message', function(msg){
