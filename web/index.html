@@ -1,2 +1,20 @@
+<!DOCTYPE html>
 <html>
+<head>
+	<title>UNAFUT TWEET SCOREBOARD</title>
+	<script src="js/vue.js"></script>
+	<script src="js/socket.io.js"></script>
+	
+</head>
+<body>
+	<div id="app">
+		<ul id="example-1">
+		<h3>Latest tweets</h3>
+		  <li v-for="tweet in tweets">
+		    <b>{{ tweet.user }}</b>
+			{{ tweet.text }}
+		  </li>
+		</ul>
+		<script src="js/main.js"></script>
+</body>
 </html>
