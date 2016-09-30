@@ -1,0 +1,26 @@
+{
+  "name": "rethink-unafut",
+  "version": "1.0.0",
+  "description": "RethinkDB demo",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jotaporras/rethink-unafut.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jotaporras/rethink-unafut/issues"
+  },
+  "homepage": "https://github.com/jotaporras/rethink-unafut#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cors": "^2.8.1",
+    "express": "^4.14.0",
+    "rethinkdb": "^2.3.3",
+    "socket.io": "^1.4.8"
+  }
+}

@@ -5,7 +5,7 @@ services:
     image: rethinkdb:2.3.5
     command: rethinkdb --bind all --bind-http all
     ports:
-      - "28015"
+      - "315:28015"
       - "29015"
       - "420:8080"
   worker:
