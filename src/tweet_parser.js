@@ -2,7 +2,7 @@ var Twit = require('twit')
 var rethinkdb = require('rethinkdb');
 
 var dbHost = 'localhost';
-var dbPort = 28015;
+var dbPort = 315;
 var dbName = 'unafut';
 var tableName = 'tweets';
 

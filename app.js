@@ -14,7 +14,7 @@ app.use(cors());
 
 // RethinkDB settings
 var dbHost = 'localhost';
-var dbPort = 28015;
+var dbPort = 315;
 var dbName = 'unafut';
 var tableName = 'tweets';
 
