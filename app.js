@@ -164,6 +164,7 @@ function sendLatestTweet(conn, socket, user, text) {
           score: grouping.reduction
         }
       })
+      scores = sortScores(scores);
       // Build tweet message
       var tweetMsg = {
         scores: scores,
@@ -175,4 +176,16 @@ function sendLatestTweet(conn, socket, user, text) {
       // Send message
       socket.emit('tweet', tweetMsg);
     });
+}
+
+// Sorts the scores in descending order
+function sortScores(scores) {
+  return scores.sort(function (entryA, entryB) {
+    if (entryA.score > entryB.score) {
+      return -1;
+    } else if (entryB.score > entryA.score) {
+      return 1;
+    }
+    return 0;
+  })
 }
