@@ -2,7 +2,7 @@ var Twit = require('twit')
 var rethinkdb = require('rethinkdb');
 
 var dbHost = 'localhost';
-var dbPort = 315;
+var dbPort = 28015;
 var dbName = 'unafut';
 var tableName = 'tweets';
 
@@ -19,37 +19,48 @@ module.exports = {
 		setTimeout(function(){
 			console.log("called loading tweets")
 			load();
-			startAPITweetload();
-		},5000);
+		},1000);
 	}
 };
 
 
-
-function startAPITweetload(){
-	setTimeout(function(){
-		load();
-		startAPITweetload();
-	},5000);
+function getHashtags(tweet) {
+  return tweet.toLowerCase().match(/#(\w+)/g).map(function (str) {
+    // Remove pound symbol
+    return str.substring(1);
+  })
 }
-
 
 
 function load(){
 	var teams = "futbol #saprissa OR #lda OR #heredia OR #cartago OR #perezzeledon OR #carmelita ";
 	console.log(teams);
-	T.get('search/tweets', { q: teams, count: 4000 }, function(err, data, response) {
+	T.get('search/tweets', { q: teams, count: 5000 }, function(err, data, response) {
 		//console.log(data)
 		if(data.statuses.length===0) return [];
 	  var parsed =  data.statuses.map(function(tweet){
 	  	return {
 	  		user: tweet.user.screen_name,
-	  		text: tweet.text
+	  		message: tweet.text,
+	  		tags: getHashtags(tweet.text),
+	  		timestamp: Date.now()
 	  	};
 	  });
 	  //console.log(parsed);
-	  
-	  parsed.forEach(function(parsedTweet){
+	  var chosen = parsed[Math.floor(Math.random()*parsed.length)];
+	  rethinkdb.connect({host: dbHost, port: dbPort})
+	  .then(function(conn) {
+	      return rethinkdb.db(dbName).table(tableName)
+	        .insert(chosen).run(conn);
+	  }).then(function () {
+	    //res.status(201).end();
+	    module.exports.startAPITweetload();
+	  }).error(function (err) {
+	    console.log('Error:', err);
+	    //res.status(500).end();
+	  });
+
+	  /*parsed.forEach(function(parsedTweet){
 	  		console.log("storing");
 
 	  		rethinkdb.connect({host: dbHost, port: dbPort})
@@ -62,7 +73,7 @@ function load(){
 	  		  console.log('Error:', err);
 	  		  res.status(500).end();
 	  		});
-	  });
+	  });*/
 
 	  
 	  //TODO: rethink.save(parsed);

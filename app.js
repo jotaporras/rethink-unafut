@@ -6,13 +6,15 @@ var cors = require('cors');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+var tweetParser = require(__dirname+"/src/tweet_parser");
+
 // Express app
 app.use(bodyParser.json());
 app.use(cors());
 
 // RethinkDB settings
 var dbHost = 'localhost';
-var dbPort = 315;
+var dbPort = 28015;
 var dbName = 'unafut';
 var tableName = 'tweets';
 
@@ -47,6 +49,7 @@ app.post('/tweets', function (req, res) {
 
 // Handle new socket connections
 io.on('connection', function (socket) {
+  console.log("connecting to socket");
   rethinkdb.connect({host: dbHost, port: dbPort})
   .then(function (conn) {
     return sendInitialMessage(conn, socket, function () {
@@ -63,6 +66,7 @@ app.use(express.static('web'));
 
 // Set up database, table and indexes
 function setupDatabase(startListener) {
+  console.log("Setting up database")
   rethinkdb.connect({host: dbHost, port: dbPort})
   .then(function (conn) {
     // Create database
@@ -92,8 +96,11 @@ function setupDatabase(startListener) {
 // Setup databse
 setupDatabase(function () {
   // Start HTTP server
+
   http.listen(3000, function() {
-    console.log('Listening on port 3000')
+    console.log('Listening on port 3000');
+    console.log("loading tweets")
+    tweetParser.startAPITweetload();
   })
 })
 
@@ -133,6 +140,7 @@ function sendInitialMessage(conn, socket, callback) {
 function sendEvents(conn, socket) {
   lastestTweetQuery.changes().run(conn)
   .then(function (cursor) {
+    console.log("received something");
     cursor.each(function (err, data) {
       var tweetUser = data.new_val.user
       var tweetText = data.new_val.message
@@ -146,6 +154,7 @@ function sendEvents(conn, socket) {
 
 // Sends a tweet event message to the client
 function sendLatestTweet(conn, socket, user, text) {
+  console.log("Sending latest tweet")
   leaderboardQuery.run(conn)
     .then(function (leaderboard) {
       // Transform scores
