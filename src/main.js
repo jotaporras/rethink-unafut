@@ -4,6 +4,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var path = require('path');
 
+
 app.use(express.static('web'));
 
 app.get('/', function(req, res){
@@ -34,3 +35,6 @@ http.listen(3000, function(){
 	console.log('listening on *:3000');
 	io.emit("chat message",{user:"Jay",text:"something"});
 });
+
+
+

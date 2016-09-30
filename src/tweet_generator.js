@@ -7,6 +7,23 @@ var genericTweet = [
 ];
 
 
+function startFakeTweetload(){
+	setTimeout(function(){
+		simulateStreamStorage();
+		startFakeTweetload();
+	},5000);
+}
+
+function simulateStream(){
+	var tweets = [];
+	for(var i=0;i<4000;i++){
+		var randomTweet = generateRandomTweet();
+		tweets.push(randomTweet);
+	}
+	//TODO: rethink.save(tweets)
+}
+
+
 function generateRandomTweet(){
 	var tweetStructure = pickGenericTweet();
 	var team = pickTeam();
@@ -23,8 +40,8 @@ function pickTeam(){
 		case rand>=40 && rand<70: return "lda";
 		case rand>=70 && rand<85: return "heredia";
 		case rand>=85 && rand<95: return "cartago";
-		case rand>=95 && rand<98: return "perez";
-		case rand>=98 && rand<100: return "brujas";
+		case rand>=95 && rand<98: return "perezzeledon";
+		case rand>=98 && rand<100: return "carmelita";
 		default: return "Messi";
 	}
 }

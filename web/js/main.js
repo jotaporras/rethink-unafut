@@ -7,7 +7,7 @@ var vm = new Vue({
       { user: "John",text: 'Foo' },
       { user: "James",text: 'Bar' }
     ],
-    teams: [
+    scores: [
     	{name: "Heredia",score: 0}
     ]
   },
@@ -27,7 +27,7 @@ var vm = new Vue({
 
 socket.on('tweet', function(tweet){
 	console.log("received ",tweet);
-  	vm.tweets.push(tweet.latestTweet);
-  	vm.teams = tweet.table;
+  	vm.tweets.unshift(tweet.latestTweet);
+  	vm.scores = tweet.scores;
 });
 
