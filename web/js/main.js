@@ -18,7 +18,7 @@ socket.on('chat message', function(msg){
 });*/
 var socket = io();
 
-var example1 = new Vue({
+var vm = new Vue({
   el: '#app',
   data: {
     tweets: [
@@ -29,7 +29,8 @@ var example1 = new Vue({
   methods: []
 });
 
-socket.on('chat message', function(msg){
-  vm.messages.push(msg);
+socket.on('tweet', function(tweet){
+	console.log("received ",tweet);
+  	vm.tweets.push(tweet.latestTweet);
 });
 
