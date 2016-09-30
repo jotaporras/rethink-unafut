@@ -20,7 +20,7 @@ function pickTeam(){
 	var rand = Math.floor(Math.random()*100);
 	 switch(true){
 		case rand>=0 && rand<40: return "saprissa";
-		case rand>=40 && rand<70: return "saprissa";
+		case rand>=40 && rand<70: return "lda";
 		case rand>=70 && rand<85: return "heredia";
 		case rand>=85 && rand<95: return "cartago";
 		case rand>=95 && rand<98: return "perez";

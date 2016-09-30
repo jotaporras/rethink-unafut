@@ -19,14 +19,17 @@
 		.main {
 		    background-color: red;
 		    opacity: 0.95;
-		    max-width: 50%;
+		    max-width: 80%;
 		    min-height: 900px;
-		    margin-left:25%;
+		    margin-left:10%;
 		    color: black;
 		    display:block;
+		    font-size:16pt;
+		    font-family:"Comic Sans MS";
+
 		}
 		.winner{
-			color:blue;
+			color:white;
 		}
 	</style>
 </head>	
@@ -50,7 +53,7 @@
 		<ul>
 			<li v-for="tweet in tweets">
 				<b>{{ tweet.user }}</b>
-				{{ tweet.text }}
+				{{{ parse(tweet.text) }}}
 			</li>
 		</ul>
 		<script src="js/main.js"></script>

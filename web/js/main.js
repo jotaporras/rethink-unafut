@@ -11,7 +11,18 @@ var vm = new Vue({
     	{name: "Heredia",score: 0}
     ]
   },
-  methods: []
+  methods: {
+  	parse: function(tweetText){
+  		var tokens = tweetText.split(" ");
+  		var parsed = tokens.map(function(word){
+  			if(word.charAt(0) === "#")
+  				return  "<b style='color:blue'>" + word + '</b>';
+  			else return word;
+  		});
+  		return parsed.join(" ");
+
+  	}
+  }
 });
 
 socket.on('tweet', function(tweet){
