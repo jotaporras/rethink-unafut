@@ -29,7 +29,7 @@ function load(){
 	  });
 	  console.log(parsed);
 	  
-	  rethink.persist(parsed);
+	  //TODO: rethink.save(parsed);
 	});
 }
 
