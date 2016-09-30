@@ -12,7 +12,7 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
 	//Send initial tweet
-	var initialTweet = {table:[],latestTweet:{user:"CLagos9",text:"Que Dios tenga a #Heredia en su santa gloria"}};
+	var initialTweet = {table:[{team:"Heredia",score:10}],latestTweet:{user:"CLagos9",text:"Que Dios tenga a #Heredia en su santa gloria"}};
 	io.emit("tweet",initialTweet);
 	socket.on('tweet', function(msg){
 		var sampleTweet = {

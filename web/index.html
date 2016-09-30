@@ -4,17 +4,55 @@
 	<title>UNAFUT TWEET SCOREBOARD</title>
 	<script src="js/vue.js"></script>
 	<script src="js/socket.io.js"></script>
-	
-</head>
-<body>
-	<div id="app">
-		<ul id="example-1">
-		<h3>Latest tweets</h3>
-		  <li v-for="tweet in tweets">
-		    <b>{{ tweet.user }}</b>
-			{{ tweet.text }}
-		  </li>
+	<style>
+		table, th, td {
+			border: 1px solid black;
+			margin-left: 33%;
+		}
+		
+		.logo {
+			text-align:center;
+			margin: auto;
+			display:block;
+		}
+
+		.main {
+		    background-color: red;
+		    opacity: 0.95;
+		    max-width: 50%;
+		    min-height: 900px;
+		    margin-left:25%;
+		    color: black;
+		    display:block;
+		}
+		.winner{
+			color:blue;
+		}
+	</style>
+</head>	
+<body background="cr.jpg">
+	<div id="app" class="main">
+		<img class="logo" src="unafut.png"  width="225"/>
+		<h1>Welcome to UNAFUT in the 90s</h1>
+		<h2>Team Scores</h2>
+		<div>The current leader is : <b class="winner">{{ teams[0].team }}</b> </div><br/>
+		<table>
+			<tr>
+				<th>Team</th>
+				<th>Score</th>
+			</tr>		
+			<tr v-for="team in teams">
+				<td> {{team.team}} </td>
+				<td> {{team.score}} </td>
+			</tr>
+		</table>
+		<h2>Latest tweets(from a total of {{tweets.length}} polled)</h2>
+		<ul>
+			<li v-for="tweet in tweets">
+				<b>{{ tweet.user }}</b>
+				{{ tweet.text }}
+			</li>
 		</ul>
 		<script src="js/main.js"></script>
-</body>
-</html>
+	</body>
+	</html>

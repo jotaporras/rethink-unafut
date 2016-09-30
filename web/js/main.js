@@ -1,21 +1,3 @@
-console.log("hola");
-/*var vm = new Vue({
-  el: "#app",
-  data: {
-    messages: [],
-    input: ""
-  },
-  methods: {
-    post: function(e) {
-      socket.emit('chat message', this.input);
-      e.preventDefault();
-    }
-  }
-});
-
-socket.on('chat message', function(msg){
-  vm.messages.push(msg);
-});*/
 var socket = io();
 
 var vm = new Vue({
@@ -24,6 +6,9 @@ var vm = new Vue({
     tweets: [
       { user: "John",text: 'Foo' },
       { user: "James",text: 'Bar' }
+    ],
+    teams: [
+    	{name: "Heredia",score: 0}
     ]
   },
   methods: []
@@ -32,5 +17,6 @@ var vm = new Vue({
 socket.on('tweet', function(tweet){
 	console.log("received ",tweet);
   	vm.tweets.push(tweet.latestTweet);
+  	vm.teams = tweet.table;
 });
 
