@@ -104,13 +104,27 @@ setupDatabase(function () {
   })
 })
 
+// Teams to track
+var teams = [
+  'carmelita',
+  'cartago',
+  'heredia',
+  'lda',
+  'perezzeledon',
+  'saprissa'
+];
 
 // Gets the hashtags from a string
 function getHashtags(tweet) {
-  return tweet.toLowerCase().match(/#(\w+)/g).map(function (str) {
+  return tweet.toLowerCase().match(/#(\w+)/g)
+  .map(function (str) {
     // Remove pound symbol
     return str.substring(1);
   })
+  .filter(function (hashtag) {
+    // Remove invalid teams
+    return teams.indexOf(hashtag) >= 0;
+  });
 }
 
 // Sends the initial message upon connection
